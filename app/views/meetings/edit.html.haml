@@ -5,6 +5,12 @@
 = link_to 'Back', meetings_path
 
 %hr
+
+- @meeting.talks.each do |talk|
+  = talk.title
+  %br
+
+%hr
 - @talk = Talk.new
 = form_for @talk, :url => meeting_talks_path(@meeting) do |f| 
   -if @talk.errors.any? 
@@ -33,11 +39,6 @@
     = f.label :tag_list
     %br
     = f.text_field :tag_list 
-
-  .field
-    = f.label :meeting
-    %br
-    = f.text_field :meeting 
   
   .actions
     = f.submit

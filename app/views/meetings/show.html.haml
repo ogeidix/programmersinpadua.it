@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %b When:
+  = @meeting.when
+%p
+  %b Description:
+  = @meeting.description
+= link_to 'Edit', edit_meeting_path(@meeting)
+|
+\#{link_to 'Back', meetings_path}
