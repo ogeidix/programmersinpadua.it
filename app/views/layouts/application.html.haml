@@ -9,5 +9,14 @@
     = csrf_meta_tags
     
   %body
-    
-    = yield
+    .container
+      .row
+        %ul.nav-bar  
+          %li
+            = link_to "PiP", root_path
+          %li
+            = link_to "Archivio", meetings_path
+          %li 
+            %a{:href=>"#"} Persone
+      .row
+        = yield
