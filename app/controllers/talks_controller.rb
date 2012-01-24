@@ -1,15 +1,4 @@
 class TalksController < ApplicationController
-  # GET /talks
-  # GET /talks.json
-  def index
-    @meeting = Meeting.find(params[:meeting_id])
-    @talks = @meeting.talks
-    
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @talks }
-    end
-  end
 
   # GET /talks/1
   # GET /talks/1.json
@@ -23,31 +12,22 @@ class TalksController < ApplicationController
     end
   end
 
-  # GET /talks/new
-  # GET /talks/new.json
-  def new
-    @talk = Talk.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @talk }
-    end
-  end
-
   # GET /talks/1/edit
   def edit
-    @talk = Talk.find(params[:id])
+    @meeting = Meeting.find(params[:meeting_id])
+    @talk = @meeting.talks.find(params[:id])
   end
 
   # POST /talks
   # POST /talks.json
   def create
-    @talk = Talk.new(params[:talk])
+    @meeting = Meeting.find(params[:meeting_id])
+    @talk = @meeting.talks.new(params[:talk])
 
     respond_to do |format|
       if @talk.save
-        format.html { redirect_to @talk, notice: 'Talk was successfully created.' }
-        format.json { render json: @talk, status: :created, location: @talk }
+        format.html { redirect_to meeting_talk_url(@meeting,@talk), notice: 'Talk was successfully created.' }
+        format.json { render json: @talk, status: :created, location: meeting_talk_url(@meeting,@talk) }
       else
         format.html { render action: "new" }
         format.json { render json: @talk.errors, status: :unprocessable_entity }
@@ -58,11 +38,12 @@ class TalksController < ApplicationController
   # PUT /talks/1
   # PUT /talks/1.json
   def update
-    @talk = Talk.find(params[:id])
+    @meeting = Meeting.find(params[:meeting_id])
+    @talk = @meeting.talks.find(params[:id])
 
     respond_to do |format|
       if @talk.update_attributes(params[:talk])
-        format.html { redirect_to @talk, notice: 'Talk was successfully updated.' }
+        format.html { redirect_to meeting_talk_url(@meeting,@talk), notice: 'Talk was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -74,11 +55,12 @@ class TalksController < ApplicationController
   # DELETE /talks/1
   # DELETE /talks/1.json
   def destroy
-    @talk = Talk.find(params[:id])
+    @meeting = Meeting.find(params[:meeting_id])
+    @talk = @meeting.talks.find(params[:id])
     @talk.destroy
 
     respond_to do |format|
-      format.html { redirect_to talks_url }
+      format.html { redirect_to meeting_talks_url(@meeting) }
       format.json { head :ok }
     end
   end
