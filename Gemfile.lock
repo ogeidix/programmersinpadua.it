@@ -117,6 +117,9 @@ GEM
     wikicloth (0.7.1)
       builder
       expression_parser
+    zurb-foundation (2.1.4.3)
+      jquery-rails (~> 1.0)
+      rails (~> 3.1)
 
 PLATFORMS
   ruby
@@ -131,3 +134,4 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   unicorn
   wikicloth
+  zurb-foundation
