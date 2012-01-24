@@ -1,5 +1,7 @@
 Pip::Application.routes.draw do
   
+  resources :tags
+
   resources :meetings do
     resources :talks
   end

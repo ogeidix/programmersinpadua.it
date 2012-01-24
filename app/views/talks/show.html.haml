@@ -1,0 +1,19 @@
+%p#notice= notice
+%p
+  %b User:
+  = @talk.user
+%p
+  %b Title:
+  = @talk.title
+%p
+  %b Description:
+  = @talk.description
+%p
+  %b Tag list:
+  = @talk.tag_list
+%p
+  %b Meeting:
+  = @talk.meeting
+= link_to 'Edit', edit_talk_path(@talk)
+|
+\#{link_to 'Back', talks_path}
