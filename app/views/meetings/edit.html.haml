@@ -1,0 +1,45 @@
+%h2 Editing meeting
+= render 'form'
+= link_to 'Show', @meeting
+\ |
+= link_to 'Back', meetings_path
+
+%hr
+- @talk = Talk.new
+= form_for @talk, :url => meeting_talks_path(@meeting) do |f| 
+  -if @talk.errors.any? 
+    #error_explanation
+      %h2= pluralize(@talk.errors.count, "error")  + "prohibited this talk from being saved:"
+      %ul
+        - @talk.errors.full_messages.each do |msg| 
+          %li= msg
+
+  .field
+    = f.label :user
+    %br
+    = f.text_field :user 
+
+  .field
+    = f.label :title
+    %br
+    = f.text_field :title 
+  
+  .field
+    = f.label :description
+    %br
+    = f.text_area :description 
+  
+  .field
+    = f.label :tag_list
+    %br
+    = f.text_field :tag_list 
+
+  .field
+    = f.label :meeting
+    %br
+    = f.text_field :meeting 
+  
+  .actions
+    = f.submit
+    
+

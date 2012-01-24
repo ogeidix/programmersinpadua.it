@@ -2,8 +2,9 @@ class TalksController < ApplicationController
   # GET /talks
   # GET /talks.json
   def index
-    @talks = Talk.all
-
+    @meeting = Meeting.find(params[:meeting_id])
+    @talks = @meeting.talks
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @talks }
@@ -13,7 +14,8 @@ class TalksController < ApplicationController
   # GET /talks/1
   # GET /talks/1.json
   def show
-    @talk = Talk.find(params[:id])
+    @meeting = Meeting.find(params[:meeting_id])
+    @talk = @meeting.talks.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
